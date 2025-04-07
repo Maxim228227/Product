@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JumpFit - Фитнес на батутах</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #1F2937; }
+    </style>
+</head>
+<body>
+
+<nav class="flex justify-center space-x-6 p-4 bg-gray-800 shadow-lg fixed top-0 w-full z-10 backdrop-blur-md">
+    <a href="#home" class="text-white font-semibold hover:text-gray-400 transition-all">Главная</a>
+    <a href="#about" class="text-white font-semibold hover:text-gray-400 transition-all">О нас</a>
+    <a href="#subscriptions" class="text-white font-semibold hover:text-gray-400 transition-all">Абонементы</a>
+    <a href="#staff" class="text-white font-semibold hover:text-gray-400 transition-all">Наши сотрудники</a>
+    <a href="#contact" class="text-white font-semibold hover:text-gray-400 transition-all">Контакты</a>
+</nav>
+
+<div id="content" class="pt-16"></div>
+
+<script>
+    const content = document.getElementById('content');
+
+    const renderHome = () => {
+        content.innerHTML = `
+            <div class="p-10 text-center bg-gray-900 text-white min-h-screen flex flex-col items-center justify-center">
+                <h1 class="text-6xl font-extrabold drop-shadow-lg">JumpFit - Фитнес на батутах</h1>
+                <p class="mt-6 text-xl max-w-xl">Зарядись энергией и прокачай выносливость с нашими динамичными тренировками!</p>
+                <p class="mt-4 text-lg max-w-lg">Наши тренировки подходят для всех возрастов и уровней подготовки. Присоединяйтесь и ощутите лёгкость в движении!</p>
+                <button class="mt-6 bg-gray-700 text-white px-6 py-3 rounded-full shadow-xl hover:bg-gray-600 transition-all">Записаться</button>
+            </div>
+        `;
+    };
+
+    const renderAbout = () => {
+        content.innerHTML = `
+            <div class="p-10 text-center bg-gray-800 text-white min-h-screen flex flex-col items-center justify-center">
+                <h1 class="text-6xl font-extrabold drop-shadow-lg">О нас</h1>
+                <p class="mt-6 text-xl max-w-lg">JumpFit – это место, где фитнес становится настоящим удовольствием!</p>
+                <p class="mt-6 text-lg max-w-lg">Мы создали JumpFit для тех, кто хочет тренироваться эффективно и весело.</p>
+            </div>
+        `;
+    };
+
+    const renderSubscriptions = () => {
+        content.innerHTML = `
+            <div class="p-10 text-center bg-gray-800 text-white min-h-screen flex flex-col items-center justify-center">
+                <h1 class="text-5xl font-bold">Абонементы</h1>
+                <p class="mt-4 text-lg max-w-lg">Выберите подходящий абонемент и начните тренироваться уже сегодня!</p>
+                <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
+                    ${[4, 8, 12, 16].map(sessions => `
+                        <div class="bg-gray-700 text-white p-6 rounded-lg shadow-lg">
+                            <h2 class="text-2xl font-bold">${sessions} занятий</h2>
+                            <p class="mt-2 text-lg">Стоимость: ${sessions * 10} BYN</p>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    };
+
+    const renderStaff = () => {
+        content.innerHTML = `
+            <div class="p-10 text-center bg-gray-800 text-white min-h-screen flex flex-col items-center justify-center">
+                <h1 class="text-5xl font-bold">Наши сотрудники</h1>
+                <p class="mt-4 text-lg max-w-lg">Познакомьтесь с нашей командой профессионалов!</p>
+                <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
+                    ${['Директор', 'Фитнес-тренер', 'Фитнес-тренер', 'Менеджер по продвижению'].map((role) => `
+                        <div class="bg-gray-700 text-white p-6 rounded-lg shadow-lg">
+                            <div class="w-32 h-32 bg-gray-600 rounded-full mx-auto"></div>
+                            <h2 class="text-2xl font-bold mt-4">${role}</h2>
+                            <p class="mt-2">Описание роли: ${role === 'Директор' ? 'Опытный руководитель.' : 'Профессионал, который поможет вам достичь желаемых результатов.'}</p>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    };
+
+    const renderContact = () => {
+        content.innerHTML = `
+            <div class="p-10 text-center bg-gray-900 text-white min-h-screen flex flex-col items-center justify-center">
+                <h1 class="text-5xl font-bold">Контакты</h1>
+                <p class="mt-4 text-lg max-w-lg">Свяжитесь с нами для записи и консультации!</p>
+                <p class="mt-4 text-lg max-w-lg">📍 Наш адрес: Жолтовского пр, 51, Пинск</p>
+                <p class="mt-2 text-lg max-w-lg">📞 Телефон: +375 (44) 245-73-21</p>
+                <p class="mt-2 text-lg max-w-lg">📧 Email: Maxim_and_Nikita@gmail.com</p>
+            </div>
+        `;
+    };
+
+    const routes = {
+        '#home': renderHome,
+        '#about': renderAbout,
+        '#subscriptions': renderSubscriptions,
+        '#staff': renderStaff,
+        '#contact': renderContact,
+    };
+
+    const routeChangeHandler = () => {
+        const hash = window.location.hash || '#home';
+        const render = routes[hash] || renderHome;
+        render();
+    };
+
+    window.addEventListener('hashchange', routeChangeHandler);
+    window.addEventListener('load', routeChangeHandler);
+
+    // Инициализация контента при первой загрузке
+    document.addEventListener('DOMContentLoaded', routeChangeHandler);
+</script>
+
+</body>
+</html>
